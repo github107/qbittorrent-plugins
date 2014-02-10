@@ -31,42 +31,41 @@ from helpers import retrieve_url, download_file
 import json
 
 class kickasstorrents(object):
-  url = 'http://kickass.to'
-  name = 'kickasstorrents'
-  supported_categories = {'all': '', 'movies': 'Movies', 'tv': 'TV', 'music': 'Music', 'games': 'Games', 'software': 'Applications'}
+    url = 'http://kickass.to'
+    name = 'kickasstorrents'
+    supported_categories = {'all': '', 'movies': 'Movies', 'tv': 'TV', 'music': 'Music', 'games': 'Games', 'software': 'Applications'}
 
-  def __init__(self):
-    self.results = []
+    def __init__(self):
+        self.results = []
 
-  def download_torrent(self, info):
-    print download_file(info, info)
+    def download_torrent(self, info):
+        print download_file(info, info)
 
-  def search(self, what, cat='all'):
-    ret = []
-    i = 1
-    while True and i<11:
-      results = []
-      json_data = retrieve_url(self.url+'/json.php?q=%s&page=%d'%(what, i))
-      try:
-        json_dict = json.loads(json_data)
-      except:
-	i += 1
-	continue
-      if int(json_dict['total_results']) <= 0: return
-      results = json_dict['list']
-      for r in results:
-        try:
-          if cat != 'all' and self.supported_categories[cat] != r['category']: continue
-          res_dict = dict()
-          res_dict['name'] = r['title']
-          res_dict['size'] = str(r['size'])
-          res_dict['seeds'] = r['seeds']
-          res_dict['leech'] = r['leechs']
-          res_dict['link'] = r['torrentLink']
-          res_dict['desc_link'] = r['link']
-          res_dict['engine_url'] = self.url
-          prettyPrinter(res_dict)
-        except:
-          pass
-      i += 1
-      
+    def search(self, what, cat='all'):
+        ret = []
+        i = 1
+        while True and i<11:
+            results = []
+            json_data = retrieve_url(self.url+'/json.php?q=%s&page=%d'%(what, i))
+            try:
+                json_dict = json.loads(json_data)
+            except:
+                i += 1
+                continue
+            if int(json_dict['total_results']) <= 0: return
+            results = json_dict['list']
+            for r in results:
+                try:
+                    if cat != 'all' and self.supported_categories[cat] != r['category']: continue
+                    res_dict = dict()
+                    res_dict['name'] = r['title']
+                    res_dict['size'] = str(r['size'])
+                    res_dict['seeds'] = r['seeds']
+                    res_dict['leech'] = r['leechs']
+                    res_dict['link'] = r['torrentLink']
+                    res_dict['desc_link'] = r['link']
+                    res_dict['engine_url'] = self.url
+                    prettyPrinter(res_dict)
+                except:
+                    pass
+            i += 1
