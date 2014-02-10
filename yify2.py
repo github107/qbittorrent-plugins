@@ -4,8 +4,8 @@ import json
 
 class yify2(object):
 	url = 'http://yts.im'
-  	name = 'YIFY JSON'
-  	
+	name = 'YIFY Torrents'
+	
 	supported_categories = {
 		'all': 'All',
 		'movies': 'Comedy',

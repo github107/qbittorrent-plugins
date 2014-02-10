@@ -40,11 +40,13 @@ class x1337(object):
 			d['name'] = tag.sub('', d['name'])
 			d['link'] = d['desc_link']
 			d['cat_id'] = int(d['cat_id'])
+			# exclude xxx videos from the result
+			if d['cat_id'] in [48, 49, 50, 51]:
+				continue
 			if cat != 'all':
 				if d['cat_id'] in self.supported_categories[cat]:
 					yield d
-			# if cat==all: exclude xxx videos		
-			elif not d['cat_id'] in [48, 49, 50, 51]:
+			else:
 				yield d
 
 	def search(self, what, cat='all'):
