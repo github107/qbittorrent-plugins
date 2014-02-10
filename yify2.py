@@ -8,7 +8,7 @@ class yify2(object):
     
     supported_categories = {
         'all': 'All',
-        'movies': 'Comedy',
+        #'movies': 'Comedy',
         'music': 'Music',
         'anime': 'Animation',
     }
